@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Social Login</string>
+
+    <string name="facebook_app_id">YOUR-FACEBOOK-APP-ID</string>
+    <string name="facebook_client_token">YOUR-FACEBOOK-CLIENT-TOKEN</string>
+    <string name="fb_login_protocol_scheme">YOUR-FACEBOOK-PROTOCOL_SCHEME</string> <!--Not mandatory-->
+
+</resources>
