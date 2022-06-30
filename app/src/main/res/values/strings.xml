@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Social Login</string>
 
-    <string name="facebook_app_id">YOUR-FACEBOOK-APP-ID</string>
+    <!--<string name="facebook_app_id">YOUR-FACEBOOK-APP-ID</string>
     <string name="facebook_client_token">YOUR-FACEBOOK-CLIENT-TOKEN</string>
-    <string name="fb_login_protocol_scheme">YOUR-FACEBOOK-PROTOCOL_SCHEME</string> <!--Not mandatory-->
+    <string name="fb_login_protocol_scheme">YOUR-FACEBOOK-PROTOCOL_SCHEME</string>--> <!--Not mandatory-->
+
+    <string name="facebook_app_id">1122423334975558</string>
+    <string name="facebook_client_token">232d80e6ac84500e18c13d416f6e7ef2</string>
+    <string name="fb_login_protocol_scheme">fb1122423334975558</string>
 
 </resources>
