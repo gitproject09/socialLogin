@@ -1,5 +1,6 @@
 package com.sopan.social_login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,10 @@ import org.json.JSONException;
 
 import java.util.Collections;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SignInActivity extends AppCompatActivity {
@@ -40,6 +45,7 @@ public class SignInActivity extends AppCompatActivity {
     private boolean socialLogin;
 
     boolean isPasswordVisible = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,8 @@ public class SignInActivity extends AppCompatActivity {
 
         findViewById(R.id.google).setOnClickListener(view -> {
             Intent signInIntent = googleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, googleInRequestCode);
+            googleSignInResultLauncher.launch(signInIntent);
+          //  startActivityForResult(signInIntent, googleInRequestCode);
         });
 
         findViewById(R.id.facebook).setOnClickListener(view -> {
@@ -64,6 +71,8 @@ public class SignInActivity extends AppCompatActivity {
             LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
+
+                    Log.d("FacebookLogin", "Result: ");
 
                     GraphLoginRequest(loginResult.getAccessToken());
                 }
@@ -84,6 +93,27 @@ public class SignInActivity extends AppCompatActivity {
         });
 
     }
+
+    public void openSomeActivityForResult() {
+        Intent intent = new Intent(this, MainActivity.class);
+        googleSignInResultLauncher.launch(intent);
+    }
+
+    // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
+    ActivityResultLauncher<Intent> googleSignInResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+                        handleSignInResult(task);
+
+                    }
+                }
+            });
 
     @Override
     public void onBackPressed() {
@@ -127,7 +157,7 @@ public class SignInActivity extends AppCompatActivity {
         graphRequest.executeAsync();
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -137,5 +167,5 @@ public class SignInActivity extends AppCompatActivity {
             handleSignInResult(task);
         }
 
-    }
+    }*/
 }

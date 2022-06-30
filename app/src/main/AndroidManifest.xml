@@ -23,7 +23,8 @@
 
         <activity
             android:name="com.sopan.social_login.SignInActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,7 +50,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
 
         <activity
             android:name="com.sopan.social_login.MainActivity"

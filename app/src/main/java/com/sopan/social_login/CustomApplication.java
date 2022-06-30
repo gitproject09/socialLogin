@@ -2,6 +2,8 @@ package com.sopan.social_login;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Base64;
+import android.util.Log;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -26,6 +28,10 @@ public class CustomApplication extends Application {
         }*/
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+        Log.d("AppLog", "key:" + FacebookSdk.getApplicationSignature(this));
+
+        /*final String hashKey = new String(Base64.encode(md.digest(), 0));
+        Log.i("AppLog", "key:" + hashKey + "=");*/
         AppEventsLogger.activateApp(this);
 
         super.onCreate();
